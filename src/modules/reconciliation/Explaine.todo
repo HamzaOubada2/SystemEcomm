@@ -1,0 +1,8 @@
+Before Coding we must be look From the wisdom whats happen:
+    -> System make fetch to all Orders have status=delivred
+    -> System make fetch all CarrierReports Li dkhlna l Excel
+    -> System make the match : search if trucking number exist in Reports
+    -> select Status: 
+        -> Matched => if order exist in database & excel & Nefs Price
+        -> Price Mismatch => kynin bjoj but price na9ess
+        -> Missing from Report =>
