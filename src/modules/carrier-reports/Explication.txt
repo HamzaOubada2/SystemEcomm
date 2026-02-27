@@ -1,0 +1,37 @@
+We have File Excel report.xlsx:
+| trackingNumber | collectedAmount |
+| -------------- | --------------- |
+| TRX01          | 500             |
+| TRX02          | 700             |
+| TRX03          | 1000            |
+
+
+WorkFlow Diagramme:
+  User
+  │
+  │ upload report.xlsx
+  ▼
+Controller (uploadFile)
+  │
+  │ Multer intercept file
+  ▼
+processExcel(file)
+  │
+  │ ExcelJS read buffer
+  ▼
+Workbook
+  │
+  │ getWorksheet(1)
+  ▼
+Loop rows
+  │
+  │ Convert to JS objects
+  ▼
+reports[]
+  │
+  │ repository.save()
+  ▼
+Database (PostgreSQL)
+  │
+  ▼
+Response → JSON
