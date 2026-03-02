@@ -21,7 +21,7 @@ export class CarrierReportService {
     // Create Null Object for Contains the Excel Content
     const workbook = new ExcelJS.Workbook();
 
-    //file comme from multer -> ExcelJs Read -> Conver tot structure have (sheets,rows,cells)
+    //file comme from multer -> ExcelJs Read -> Conver to structure have (sheets,rows,cells)
     await workbook.xlsx.load(file.buffer.buffer as ArrayBuffer);
 
     //Get First Sheet In Excel

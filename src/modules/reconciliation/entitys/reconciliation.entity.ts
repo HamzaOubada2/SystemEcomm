@@ -18,14 +18,17 @@ export class ReconciliationLog {
   @JoinColumn()
   order: Order;
 
-  @Column({
-    type: 'enum',
-    enum: ResultType,
-  })
-  resultType: string;
+  @Column({ nullable: true })
+  trackingNumber: string;
+
+  @Column({ type: 'enum', enum: ResultType })
+  status: ResultType;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   diffAmount: number;
+
+  @Column({ nullable: true })
+  message: string;
 
   @CreateDateColumn()
   processedAt: Date;
