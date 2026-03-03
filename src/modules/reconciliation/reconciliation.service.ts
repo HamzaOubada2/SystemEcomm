@@ -61,12 +61,20 @@ export class ReconciliationService {
     return results;
   }
 
+  // Generate Excel For Claims (Missing & Mismatch)
   async generateClaimExcel() {
     const logs = await this.logRepository.find({
       where: [{ status: ResultType.MISSING }, { status: ResultType.MISMATCH }],
+      // Where status = MISSING OR status = MISMATCH
     });
 
+    // Create Excel Workbook (all file)
     const workbook = new ExcelJS.Workbook();
+    // Create Worksheet (sheet in file)
+    /* Excel File:
+          -> Sheet1
+          -> Sheet2
+    */
     const sheet = workbook.addWorksheet('Claims Report');
 
     sheet.columns = [
@@ -75,7 +83,7 @@ export class ReconciliationService {
       { header: 'Amount Difference', key: 'diffAmount', width: 20 },
       { header: 'Message', key: 'message', width: 35 },
     ];
-
+    // Add Rows To Sheet
     sheet.addRows(logs);
     return workbook;
   }
@@ -90,12 +98,13 @@ export class ReconciliationService {
       mismatch: logs.filter((l) => l.status === ResultType.MISMATCH).length,
       missing: logs.filter((l) => l.status === ResultType.MISSING).length,
 
-      // Total Money
+      // Total Money 100 + 50 - 10 = 140
       totalClaimAmount: logs.reduce(
         (sum, log) => sum + Number(log.diffAmount),
         0,
       ),
 
+      //Convert to Pourcentage
       accuracyPercentage:
         logs.length > 0
           ? (
@@ -121,9 +130,9 @@ export class ReconciliationService {
         { trackingNumber: "TRX01", amount: 500 },
         { trackingNumber: "TRX02", amount: 700 },
       ]
-    !If we find TRX03: 
+    !If we want ti find TRX03:
     reports.find(r => r.trackingNumber === "TRX03")
-    sooo f party Search ghadi dooz 3laa TRX01 & TRX02 & TRX03 image we have 10000 order hhhh The system ghadi iwli Slooow
+    sooo f party Search ghadi dooz 3laa TRX01 & TRX02 & TRX03 imagine we have 10000 order hhhh The system ghadi iwli Slooow
 
     !-----------------------------------SOLUTION------------------------------------
     First How Map Work? Imagine i have phone & i want to call Mohcine soo i goo to contacts & search Mohcin(Fast Search)
